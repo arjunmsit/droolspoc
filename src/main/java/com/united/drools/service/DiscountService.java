@@ -21,4 +21,10 @@ public class DiscountService {
         kieSession.fireAllRules();
         kieSession.dispose();
     }
+    public Sale getFestivalDiscount() {
+        Sale s = new Sale();
+        s.setDiscount(5);
+        s.setItem("Festival");
+        return s;
+    }
 }

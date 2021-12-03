@@ -1,0 +1,17 @@
+package rules;
+
+import com.united.drools.entity.PNRData;
+
+rule "FairLockType is AUTO"
+    when
+        thisPNRData : PNRData (fareLockType == "AUTO");
+    then
+        thisPNRData.setEventType("PURCHASE_EVENT");
+end;
+
+rule "FairLockType is not AUTO"
+    when
+        thisPNRData : PNRData (fareLockType != "AUTO");
+    then
+        thisPNRData.setEventType("EXPIRE_EVENT");
+end;

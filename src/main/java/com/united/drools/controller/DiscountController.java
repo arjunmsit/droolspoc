@@ -1,9 +1,10 @@
 package com.united.drools.controller;
 
 import com.united.drools.service.DiscountService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.united.drools.entity.Sale;
 
@@ -16,9 +17,14 @@ public class DiscountController {
         this.discountService = service;
     }
 
-    @PostMapping("/discount")
-    private Sale getDiscountPercent(@RequestBody Sale sale) {
-        this.discountService.applyDiscount(sale);
-        return sale;
+    @GetMapping("/discount/{flag}")
+    public ResponseEntity<Sale> getDiscount(@PathVariable String flag){
+
+        if(flag.equalsIgnoreCase("PASS")){
+            Sale s = discountService.getFestivalDiscount();
+            return new ResponseEntity<Sale>(s, HttpStatus.OK);
+        }else{
+            throw new ResourceNotFoundException();
+        }
     }
 }

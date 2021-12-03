@@ -1,0 +1,20 @@
+package rules;
+
+import com.united.drools.entity.Rule2Response;
+import com.united.drools.entity.Reward;
+
+rule "Notify failure of Rewards API"
+    when
+        thisRule2Response : Rule2Response(reward == null);
+    then
+        thisRule2Response.setResults("Notify failure to IT Ops");
+        thisRule2Response.setErrorMessage("**Rewards API call failed**");
+end
+
+rule "Notify user for rewards added"
+    when
+        thisRule2Response : Rule2Response(reward != null);
+    then
+        thisRule2Response.setResults("Notify user for rewards added");
+        thisRule2Response.setErrorMessage("**Rewards API call successful**");
+end

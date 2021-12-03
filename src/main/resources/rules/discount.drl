@@ -6,12 +6,27 @@ rule "DiscountForCarSale"
     when
         thisSale : Sale (quantity >= 5 , item == "Car");
     then
-        thisSale.setDiscount(10);
+        thisSale.setDiscount(11);
 end;
 
 rule "DiscountForBikeSale"
     when
         thisSale : Sale (quantity >= 10 , item == "Bike");
     then
-        thisSale.setDiscount(15);
+        thisSale.setDiscount(11);
+end;
+
+rule "DiscountForBike"
+    when
+        thisSale : Sale (quantity >= 10 , item == "Bike");
+    then
+        thisSale.setDiscount(12);
+end;
+
+rule "DiscountForCar"
+    when
+        thisSale : Sale (quantity >= 10 , item == "Car");
+    then
+        thisSale.setDiscount(12);
+        System.out.println("Car and > 10");
 end;
