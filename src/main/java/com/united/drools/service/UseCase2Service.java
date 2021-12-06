@@ -7,12 +7,8 @@ import com.united.drools.entity.Sale;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,8 +30,8 @@ public class UseCase2Service {
 
     public void fireFareLockRules(PNRData pnrData) {
         KieSession kieSession = kieContainer.newKieSession();
-        kieSession.insert(pnrData);
-        kieSession.fireAllRules();
+        kieSession.insert(pnrData); // object to validate
+        kieSession.fireAllRules(); // fire all rules defined in drl
         kieSession.dispose();
     }
 
@@ -47,12 +43,14 @@ public class UseCase2Service {
         kieSession.dispose();
     }
 
+    /*public void invokeStatelessSession(Rule2Response rr){
+        StatelessKieSession s = kieContainer.newStatelessKieSession();
+        s.execute(rr);
+        System.out.println();
+    }*/
+
     public Sale invokeRestCall(String flag){
         try{
-            /*UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("localhost:8080/discount/"+flag);
-            if(flag != null){
-                builder.queryParam("flag", flag);
-            }*/
             Map<String,String> params = new HashMap<String, String>();
             params.put("flag",flag);
             Sale sale = restTemplate.getForObject(URI_TO+"/discount/{flag}", Sale.class, params);

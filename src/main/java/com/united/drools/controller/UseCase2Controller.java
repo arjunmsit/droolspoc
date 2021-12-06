@@ -22,10 +22,12 @@ public class UseCase2Controller {
 
     @PostMapping("/usecase2")
     public ResponseEntity<?> getDiscountPercent(@RequestBody PNRData pnrData) {
+        // fire rule#1 (farelock)
         this.useCase2Service.fireFareLockRules(pnrData);
         System.out.println(pnrData.getEventType());
         Reward rewardResp = null;
         Rule2Response rule2Response = new Rule2Response();
+        // set condition to call external api to pass and fail respectively
         if(pnrData.getEventType().equalsIgnoreCase("PURCHASE_EVENT")){
             reward =  useCase2Service.callRewardsApp("PASS");
         }
@@ -34,7 +36,8 @@ public class UseCase2Controller {
         }
         rule2Response.setPassenger(pnrData);
         rule2Response.setReward(reward);
-        useCase2Service.fireNotificationRules(rule2Response);
+        // fire rule#2
+        this.useCase2Service.fireNotificationRules(rule2Response);
 
         return new ResponseEntity<Rule2Response>(rule2Response,null, HttpStatus.OK);
         // pnrData.getEventType();

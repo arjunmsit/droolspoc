@@ -1,6 +1,10 @@
 package com.united.drools.entity;
 
+/**
+ * Entity class to hold request(input) and response(output) data
+ */
 public class Rule2Response {
+
     private PNRData passenger;
     private Reward reward ;
     private String results;
