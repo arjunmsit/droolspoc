@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
-import com.drools.practice.bo.Sale;
-import com.drools.practice.service.DiscountService;
+import com.united.drools.entity.Sale;
+import com.united.drools.service.DiscountService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
