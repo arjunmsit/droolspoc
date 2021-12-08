@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.united.drools.entity.PNRData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
-import com.united.drools.entity.Sale;
-import com.united.drools.service.DiscountService;
+//import com.united.drools.entity.Sale;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class FileProcessor {
 
 	@Autowired
-	private DiscountService discountService;
+	private UseCase2Service useCase2Service;
 
 	@Value("${app.directory.output}")
 	private String outputDirectory;
@@ -46,9 +46,10 @@ public class FileProcessor {
 
 		try {
 
-			Sale sale = new ObjectMapper().readValue(content, Sale.class);
+			PNRData sale = new ObjectMapper().readValue(content, PNRData.class);
 
-			this.discountService.applyDiscount(sale);
+			this.useCase2Service.fireFareLockRules(sale);
+			//System.out.println(sale.getEventType());
 
 			logger.info("Rule has executed successfully against the input.");
 
@@ -106,7 +107,7 @@ public class FileProcessor {
 
 	}
 
-	private void writeResponseToOutputDirectory( Sale sale, String fileName ) throws IOException {
+	private void writeResponseToOutputDirectory( PNRData sale, String fileName ) throws IOException {
 
 		ObjectMapper Obj = new ObjectMapper();  
 

@@ -1,9 +1,6 @@
 package com.united.drools.controller;
 
-import com.united.drools.entity.PNRData;
-import com.united.drools.entity.Reward;
-import com.united.drools.entity.Rule2Response;
-import com.united.drools.entity.Sale;
+import com.united.drools.entity.*;
 import com.united.drools.service.UseCase2Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +37,14 @@ public class UseCase2Controller {
         this.useCase2Service.fireNotificationRules(rule2Response);
 
         return new ResponseEntity<Rule2Response>(rule2Response,null, HttpStatus.OK);
+        // pnrData.getEventType();
+    }
+
+    @PostMapping("/getCustomerCategory")
+    public ResponseEntity<?> getCustomerCategory(@RequestBody Customer cust) {
+
+        this.useCase2Service.fireCustomerCategoryRules(cust);
+        return new ResponseEntity<Customer>(cust,null, HttpStatus.OK);
         // pnrData.getEventType();
     }
 

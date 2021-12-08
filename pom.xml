@@ -47,6 +47,13 @@
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-file</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.united.drools</groupId>
+			<artifactId>utilities</artifactId>
+			<scope>system</scope>
+			<version>1.0</version>
+			<systemPath>/Users/arjun/Downloads/PreChecks/out/PreChecks.jar</systemPath>
+		</dependency>
 
 	</dependencies>
 

@@ -1,9 +1,6 @@
 package com.united.drools.service;
 
-import com.united.drools.entity.PNRData;
-import com.united.drools.entity.Reward;
-import com.united.drools.entity.Rule2Response;
-import com.united.drools.entity.Sale;
+import com.united.drools.entity.*;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +74,12 @@ public class UseCase2Service {
         return null;
     }
 
+    public void fireCustomerCategoryRules(Customer customer) {
+        KieSession kieSession = kieContainer.newKieSession();
+        kieSession.insert(customer);
+        kieSession.fireAllRules();
+        kieSession.dispose();
+    }
 
 
 
