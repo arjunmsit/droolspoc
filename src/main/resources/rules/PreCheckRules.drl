@@ -12,5 +12,5 @@ rule "Is user gold citizen?"
         //thisCustomer.setCategory(PreChecks.checkOffer(thisCustomer.age));
         thisCustomer.setCategory("Gold");
         //$offer : PreChecks.isEligible(30);
-        System.out.println("In rule ->"+$offer);
+        //System.out.println("In rule ->"+$offer);
 end;
