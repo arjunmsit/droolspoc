@@ -3,14 +3,9 @@ package rules;
 import com.united.drools.entity.Customer;
 import com.united.drools.utilities.PreChecks;
 
-dialect "java"
-
-rule "Is user gold citizen?"
+rule "Is customer eligible for offer?"
     when
-        thisCustomer : Customer ();
+        thisCustomer : Customer ($age : age);
     then
-        //thisCustomer.setCategory(PreChecks.checkOffer(thisCustomer.age));
-        thisCustomer.setCategory("Gold");
-        //$offer : PreChecks.isEligible(30);
-        //System.out.println("In rule ->"+$offer);
+        thisCustomer.setCategory(PreChecks.checkOffer($age));
 end;
