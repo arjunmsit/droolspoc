@@ -1,4 +1,4 @@
-package com.drools.practice.adapter;
+package com.united.drools.adapter;
 
 import java.io.File;
 
@@ -26,7 +26,7 @@ public class FileAdapter {
 	@Bean
 	@InboundChannelAdapter(value = "fileInputChannel", poller = @Poller(fixedDelay = "10000"))
 	public MessageSource<File> fileReadingMessageSource() {
-
+        System.out.println("polling for file from: "+inputDirectory);
 		CompositeFileListFilter<File> filters = new CompositeFileListFilter<>();
 
 		filters.addFilter(new SimplePatternFileListFilter("*.txt"));
