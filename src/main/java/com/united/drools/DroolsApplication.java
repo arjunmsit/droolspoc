@@ -9,7 +9,7 @@ public class DroolsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DroolsApplication.class, args);
-		System.out.println("Spring boot drools started..."+PreChecks.isEligible(20));
+		System.out.println("Spring boot drools started...");
 	}
 
 }
