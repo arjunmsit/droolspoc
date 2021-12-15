@@ -17,7 +17,64 @@ Spring Boot app with drools rule engine integration
 - UseCase 2: Demonstrate the call to external system based on the results of rule execution
     - Use below end point in postman
     - ```http://localhost:8080/usecase2```
-    - Request payload (Usecase 2A and 2B) can be found be droolspoc/src/main/resources
+    - Request payload 1
+    ```
+      {
+        "recordLocator": "RECORDLOCATOR-XXX",
+        "pnrCreationDate": "2021-10-13T00:00:00.945Z",
+        "numInParty": 1,
+        "numOfSegments": 1,
+        "ticketTypeIndicator": "TICKET_IND",
+        "ticketText": "TICKET_TEXT",
+        "fareLockType": "AUTO",
+        "eventType": null,
+        "passenger": {
+            "firstName":"Mallikarjun",
+            "lastName":"Mallikarjun",
+            "eliteStatusCode":1,
+            "lastNamePos":2,
+            "firstNamePos":3,
+            "segment":{
+                "origin" : "Hyderabad",
+                "destination" : "London",
+                "carrierCode" : "AIR-HYD-LON"
+            }
+        },
+        "pnrContactData": {
+            "email" : "mallik@xyz.com",
+            "homePhone" : "987654321"
+        }
+    }
+      ```
+  - Request payload 2
+```
+    {
+        "recordLocator": "RECORDLOCATOR-XXX",
+        "pnrCreationDate": "2021-10-13T00:00:00.945Z",
+        "numInParty": 1,
+        "numOfSegments": 1,
+        "ticketTypeIndicator": "TICKET_IND",
+        "ticketText": "TICKET_TEXT",
+        "fareLockType": "NON_AUTO",
+        "eventType": null,
+        "passenger": {
+        "firstName":"Mallikarjun",
+        "lastName":"Mallikarjun",
+        "eliteStatusCode":1,
+        "lastNamePos":2,
+        "firstNamePos":3,
+        "segment":{
+            "origin" : "Hyderabad",
+            "destination" : "London",
+            "carrierCode" : "AIR-HYD-LON"
+        }
+        },
+        "pnrContactData": {
+        "email" : "mallik@xyz.com",
+        "homePhone" : "987654321"
+        }
+    }
+```
 
 - UseCase 3: Demonstrate the processing of message events from message broker
     - Place the same payload of use case 2 in the input directory of location mentioned in app.directory.input above
